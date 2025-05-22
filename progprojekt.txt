@@ -1,0 +1,10 @@
+A jegyzetelő alkalmazás célja, hogy a felhasználók regisztráció és bejelentkezés után saját fiókjukban jegyzeteket írhassanak, szerkeszthessenek és törölhessenek. Az alkalmazás backendjét a Django webkeretrendszer segítségével készítjük el, az adatokat SQLite vagy PostgreSQL adatbázisban tároljuk (fejlesztéshez SQLite is elegendő).
+
+A felhasználókezelést a Django beépített felhasználómodellje biztosítja. Lehetőséget adunk új fiók létrehozására (regisztráció), bejelentkezésre és kijelentkezésre. A hitelesítéshez használhatunk session-alapú vagy token-alapú autentikációt – utóbbihoz például a djangorestframework-simplejwt csomagot.
+
+Miután a felhasználó bejelentkezett, hozzáférhet saját jegyzeteihez. Minden jegyzet egy adott felhasználóhoz tartozik, más felhasználók nem férhetnek hozzá. A rendszer lehetővé teszi új jegyzet létrehozását, meglévők szerkesztését és törlését. A jegyzetek tartalmaznak szöveget, címeket, valamint létrehozási és módosítási dátumokat.
+
+Az adatbázisban két fő modell szerepel: a User (amit a Django biztosít), és a Note modell, amely a jegyzetek adatait tartalmazza. A Note modellben egy ForeignKey mező kapcsolja össze a jegyzetet a tulajdonos felhasználóval.
+
+A rendszer később bővíthető címkézési lehetőséggel, jegyzetek keresésével, fontosként való megjelöléssel, vagy akár egy webes felülettel is (pl. React vagy a Django saját template rendszere).
+
