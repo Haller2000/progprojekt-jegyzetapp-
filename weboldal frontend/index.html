@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jegyzeteim</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Jegyzetek</h1>
+        </div>
+
+        <button class="new-note-btn" onclick="openNoteModal()">
+            + Új jegyzet
+        </button>
+
+        <div id="notes-container" class="notes-grid">
+        </div>
+
+        <div class="empty-state" id="empty-state" style="display: none;">
+            <h4>Nincsenek jegyzetek</4>
+        </div>
+    </div>
+
+    <div class="navbar" id="navbar">
+        <button class="category-btn active" data-category="all">Összes</button>
+        <button class="add-category-btn" onclick="openCategoryModal()" title="Új kategória">+</button>
+    </div>
+
+    <div class="modal" id="note-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="note-modal-title">Új jegyzet</h2>
+                <button class="close-btn" onclick="closeNoteModal()">&times;</button>
+            </div>
+            <form id="note-form">
+                <div class="form-group">
+                    <label class="form-label">Cím</label>
+                    <input type="text" class="form-input" id="note-title" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tartalom</label>
+                    <textarea class="form-textarea" id="note-content" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Kategória</label>
+                    <select class="form-select" id="note-category" required>
+                        <option value="">Válassz kategóriát</option>
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeNoteModal()">Mégse</button>
+                    <button type="submit" class="btn btn-primary">Mentés</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="category-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Új kategória</h2>
+                <button class="close-btn" onclick="closeCategoryModal()">&times;</button>
+            </div>
+            <form id="category-form">
+                <div class="form-group">
+                    <label class="form-label">Kategória neve</label>
+                    <input type="text" class="form-input" id="category-name" required>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeCategoryModal()">Mégse</button>
+                    <button type="submit" class="btn btn-primary">Létrehozás</button>
+                </div>
+            </form>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
