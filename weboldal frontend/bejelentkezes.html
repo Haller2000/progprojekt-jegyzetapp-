@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>Bejelentkezés</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" />
+                    <div id="email-error" style="color:red;"></div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Jelszó:</label>
+                    <input type="password" id="password" />
+                    <div id="password-error" style="color:red;"></div>
+                </div>
+
+                <button type="submit">Bejelentkezés</button>
+            </form>
+        </div>
+    </div>
+
+    <script defer src="login.js"></script>
+</body>
+</html>
