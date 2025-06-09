@@ -231,6 +231,29 @@
             background: #30d158;
         }
 
+        .edit-categories-btn {
+            background: #ff9500;
+            color: white;
+            border: none;
+            padding: 0.6rem;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .edit-categories-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(255,149,0,0.3);
+            background: #ff8c00;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -379,6 +402,112 @@
             font-size: 1.1rem;
         }
 
+        /* Kategória szerkesztő modal stílusok */
+        .category-edit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .category-edit-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(142,142,147,0.2);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .category-edit-item:hover {
+            background: rgba(255,255,255,0.7);
+            border-color: rgba(142,142,147,0.3);
+        }
+
+        .category-edit-input {
+            flex: 1;
+            padding: 0.6rem 0.8rem;
+            border: 1px solid rgba(142,142,147,0.3);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: rgba(255,255,255,0.8);
+            color: #1c1c1e;
+            transition: all 0.3s ease;
+        }
+
+        .category-edit-input:focus {
+            outline: none;
+            border-color: #007aff;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 0 0 2px rgba(0,122,255,0.1);
+        }
+
+        .category-edit-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .category-edit-btn {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-save-btn {
+            background: #34c759;
+            color: white;
+        }
+
+        .category-save-btn:hover {
+            background: #30d158;
+            transform: scale(1.05);
+        }
+
+        .category-delete-btn {
+            background: #ff3b30;
+            color: white;
+        }
+
+        .category-delete-btn:hover {
+            background: #d70015;
+            transform: scale(1.05);
+        }
+
+        .category-cancel-btn {
+            background: #8e8e93;
+            color: white;
+        }
+
+        .category-cancel-btn:hover {
+            background: #6d6d70;
+            transform: scale(1.05);
+        }
+
+        .category-edit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .category-edit-readonly {
+            background: rgba(142,142,147,0.1);
+            border-color: rgba(142,142,147,0.2);
+            color: #8e8e93;
+            cursor: not-allowed;
+        }
+
         @keyframes slideDown {
             from {
                 opacity: 0;
@@ -455,107 +584,110 @@
             .notes-grid {
                 grid-template-columns: 1fr;
             }
+
+            .category-edit-item {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+            }
+
+            .category-edit-actions {
+                justify-content: center;
+            }
         }
 
-
-
-
-
-
-        
-
         #login-screen {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-}
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
 
-.login-box {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    padding: 2.5rem;
-    max-width: 400px;
-    width: 100%;
-    animation: fadeInUp 0.6s ease-out;
-}
+        .login-box {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            max-width: 400px;
+            width: 100%;
+            animation: fadeInUp 0.6s ease-out;
+        }
 
-.login-box h2 {
-    text-align: center;
-    color: #1c1c1e;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    font-weight: 700;
-}
+        .login-box h2 {
+            text-align: center;
+            color: #1c1c1e;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
 
-.input-group {
-    margin-bottom: 1.5rem;
-}
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
 
-.input-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #1c1c1e;
-}
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1c1c1e;
+        }
 
-.input-group input {
-    width: 100%;
-    padding: 1rem;
-    border: 1px solid rgba(142, 142, 147, 0.3);
-    border-radius: 12px;
-    font-size: 1rem;
-    background: rgba(255,255,255,0.95);
-    color: #1c1c1e;
-    transition: all 0.3s ease;
-}
+        .input-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(142, 142, 147, 0.3);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.95);
+            color: #1c1c1e;
+            transition: all 0.3s ease;
+        }
 
-.input-group input:focus {
-    outline: none;
-    border-color: #007aff;
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
-}
+        .input-group input:focus {
+            outline: none;
+            border-color: #007aff;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
 
-button[type="submit"] {
-    width: 100%;
-    padding: 1rem;
-    background: #007aff;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 18px rgba(0,122,255,0.2);
-}
+        button[type="submit"] {
+            width: 100%;
+            padding: 1rem;
+            background: #007aff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(0,122,255,0.2);
+        }
 
-button[type="submit"]:hover {
-    background: #0056cc;
-    box-shadow: 0 8px 24px rgba(0,122,255,0.3);
-    transform: translateY(-2px);
-}
+        button[type="submit"]:hover {
+            background: #0056cc;
+            box-shadow: 0 8px 24px rgba(0,122,255,0.3);
+            transform: translateY(-2px);
+        }
 
-.error {
-    color: #ff3b30;
-    font-size: 0.85rem;
-    margin-top: 0.3rem;
-    display: block;
-    min-height: 1.2em;
-}
+        .error {
+            color: #ff3b30;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: block;
+            min-height: 1.2em;
+        }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
