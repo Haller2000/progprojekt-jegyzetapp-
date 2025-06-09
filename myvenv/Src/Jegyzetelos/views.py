@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from my_task.models import JegyzetelosFelhasznalo, Jegyzet
 
 User = get_user_model()
@@ -85,4 +86,97 @@ def logout_view(request):
 
 @login_required
 def index(request):
-    return render(request, 'index.html')
+    jegyzetelos_user = JegyzetelosFelhasznalo.objects.get(user=request.user)
+    jegyzetek = Jegyzet.objects.filter(felhasznalo=jegyzetelos_user).order_by('-datum')
+    return render(request, 'index.html', {
+        'jegyzetek': jegyzetek,
+        'categories': ['Általános', 'Munka', 'Tanulás', 'Ötletek']
+    })
+
+@login_required
+def jegyzet_mentes(request):
+    if request.method == 'POST':
+        try:
+            cim = request.POST.get('cim')
+            tartalom = request.POST.get('tartalom')
+            kategoria = request.POST.get('kategoria')
+            
+            # Mezők ellenőrzése
+            if not all([cim, tartalom, kategoria]):
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Kérlek töltse ki minden mezőt!'
+                }, status=400)
+
+            if len(cim) > 200:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'A cím maximum 200 karakter lehet!'
+                }, status=400)
+
+            if len(kategoria) > 50:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'A kategória maximum 50 karakter lehet!'
+                }, status=400)
+
+            jegyzetelos_user = JegyzetelosFelhasznalo.objects.get(user=request.user)
+            
+            jegyzet = Jegyzet.objects.create(
+                felhasznalo=jegyzetelos_user,
+                cim=cim,
+                tartalom=tartalom,
+                kategoria=kategoria
+            )
+            
+            return JsonResponse({
+                'status': 'success',
+                'message': 'A jegyzet sikeresen elmentve!',
+                'jegyzet': {
+                    'id': jegyzet.id,
+                    'cim': jegyzet.cim,
+                    'tartalom': jegyzet.tartalom,
+                    'kategoria': jegyzet.kategoria,
+                    'datum': jegyzet.datum.strftime('%Y-%m-%d %H:%M:%S')
+                }
+            })
+        except JegyzetelosFelhasznalo.DoesNotExist:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'A jegyzetelő felhasználó nem található!'
+            }, status=400)
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': f'Hiba a jegyzet mentése közben: {str(e)}'
+            }, status=400)
+    return JsonResponse({
+        'status': 'error',
+        'message': 'Csak POST kérések támogatottak!'
+    }, status=400)
+
+@login_required
+def jegyzet_torles(request):
+    if request.method == 'POST':
+        try:
+            jegyzet_id = request.POST.get('jegyzet_id')
+            jegyzet = Jegyzet.objects.get(id=jegyzet_id, felhasznalo__user=request.user)
+            jegyzet.delete()
+            return JsonResponse({
+                'status': 'success',
+                'message': 'A jegyzet sikeresen törölve!'
+            })
+        except Jegyzet.DoesNotExist:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'A jegyzet nem található vagy nem engedélyezett!'
+            }, status=400)
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': f'Hiba a jegyzet törlése közben: {str(e)}'
+            }, status=400)
+    return JsonResponse({
+        'status': 'error',
+        'message': 'Csak POST kérések támogatottak!'
+    }, status=400)
