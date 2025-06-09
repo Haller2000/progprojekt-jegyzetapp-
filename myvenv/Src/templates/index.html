@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jegyzeteim</title>
-    <link rel="stylesheet" href="style.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
   </head>
   <body>
   
@@ -16,6 +17,9 @@
       <button class="new-note-btn" onclick="openNoteModal()">+ Új jegyzet</button>
 
       <div id="notes-container" class="notes-grid">
+      </div>
+
+      <div id="jegyzet-lista" class="jegyzet-lista">
       </div>
 
       <div class="empty-state" id="empty-state" style="display: none;">
@@ -91,6 +95,9 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/jegyzetek.js' %}"></script>
+  </body>
+</html>
   </body>
 </html>

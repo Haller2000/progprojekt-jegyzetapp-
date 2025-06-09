@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>Bejelentkezés</h2>
+            <form id="login-form">{% csrf_token %}
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required />
+                    <div id="email-error" style="color:red;"></div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Jelszó:</label>
+                    <input type="password" id="password" name="password" required />
+                    <div id="password-error" style="color:red;"></div>
+                </div>
+
+                <button type="submit" id="login-button">Bejelentkezés</button>
+                <a href="regisztracio.html/" class="custom-link">Nincs még fiókja? Regisztráljon!</a>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>

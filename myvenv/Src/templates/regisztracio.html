@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regisztráció</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div id="login-screen">
+    <div class="login-box">
+      <h2>Regisztráció</h2>
+      {% if error %}
+        <div class="error-message">{{ error }}</div>
+    {% endif %}
+    <form id="register-form" action="" method="POST">
+          {% csrf_token %}
+        <div class="input-group">
+          <label for="name">Első név:</label>
+          <input type="text" id="name" name="first_name" required />
+          <div id="name-error" class="error"></div>
+        </div>
+
+        <div class="input-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" required />
+          <div id="email-error" class="error"></div>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Jelszó:</label>
+          <input type="password" id="password" required />
+          <div id="password-error" class="error"></div>
+        </div>
+
+        <button type="submit" id="register-button">Regisztrálok</button>
+        <a href="/" class="custom-link">Már van fiókja? Jelentkezzen be!</a>
+      </form>
+    </div>
+  </div>
+
+  <script src="{% static 'js/registration.js' %}"></script>
+</body>
+</html>
