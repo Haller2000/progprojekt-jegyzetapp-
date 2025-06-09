@@ -1,25 +1,24 @@
-// Adatok tárolása (memóriában)
+
 let notes = [];
 let categories = ['Általános', 'Munka', 'Tanulás', 'Ötletek'];
 let currentNoteId = null;
 let currentCategory = 'all';
 
-// Inicializálás
+
 document.addEventListener('DOMContentLoaded', function() {
     updateCategoryButtons();
     updateCategorySelect();
     renderNotes();
 });
 
-// Kategória gombok frissítése
 function updateCategoryButtons() {
     const navbar = document.getElementById('navbar');
     const addBtn = navbar.querySelector('.add-category-btn');
 
-    // Töröljük a régi kategória gombokat
+
     navbar.querySelectorAll('.category-btn').forEach(btn => btn.remove());
 
-    // Összes gomb
+
     const allBtn = document.createElement('button');
     allBtn.className = 'category-btn' + (currentCategory === 'all' ? ' active' : '');
     allBtn.textContent = 'Összes';
@@ -28,7 +27,7 @@ function updateCategoryButtons() {
 
     navbar.insertBefore(allBtn, addBtn);
 
-    // Kategória gombok
+
     categories.forEach(category => {
         const btn = document.createElement('button');
         btn.className = 'category-btn' + (currentCategory === category ? ' active' : '');
@@ -39,7 +38,7 @@ function updateCategoryButtons() {
     });
 }
 
-// Kategória select frissítése
+
 function updateCategorySelect() {
     const select = document.getElementById('note-category');
     select.innerHTML = '<option value="">Válassz kategóriát</option>';
@@ -52,14 +51,12 @@ function updateCategorySelect() {
     });
 }
 
-// Szűrés kategória szerint
 function filterByCategory(category) {
     currentCategory = category;
     updateCategoryButtons();
     renderNotes();
 }
 
-// Jegyzetek megjelenítése
 function renderNotes() {
     const container = document.getElementById('notes-container');
     const emptyState = document.getElementById('empty-state');
@@ -92,7 +89,6 @@ function renderNotes() {
     `).join('');
 }
 
-// Jegyzet modal megnyitása
 function openNoteModal(noteId = null) {
     const modal = document.getElementById('note-modal');
     const title = document.getElementById('note-modal-title');
@@ -115,26 +111,22 @@ function openNoteModal(noteId = null) {
     document.body.style.overflow = 'hidden';
 }
 
-// Jegyzet modal bezárása
 function closeNoteModal() {
     document.getElementById('note-modal').style.display = 'none';
     document.body.style.overflow = 'auto';
     currentNoteId = null;
 }
 
-// Kategória modal megnyitása
 function openCategoryModal() {
     document.getElementById('category-modal').style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
 
-// Kategória modal bezárása
 function closeCategoryModal() {
     document.getElementById('category-modal').style.display = 'none';
     document.body.style.overflow = 'auto';
 }
 
-// Jegyzet mentése
 document.getElementById('note-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -143,14 +135,12 @@ document.getElementById('note-form').addEventListener('submit', function(e) {
     const category = document.getElementById('note-category').value;
 
     if (currentNoteId) {
-        // Szerkesztés
         const note = notes.find(n => n.id === currentNoteId);
         note.title = title;
         note.content = content;
         note.category = category;
         note.date = new Date();
     } else {
-        // Új jegyzet
         const newNote = {
             id: Date.now(),
             title,
@@ -165,7 +155,6 @@ document.getElementById('note-form').addEventListener('submit', function(e) {
     closeNoteModal();
 });
 
-// Kategória létrehozása
 document.getElementById('category-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -180,12 +169,10 @@ document.getElementById('category-form').addEventListener('submit', function(e) 
     }
 });
 
-// Jegyzet szerkesztése
 function editNote(id) {
     openNoteModal(id);
 }
 
-// Jegyzet törlése
 function deleteNote(id) {
     if (confirm('Biztosan törölni szeretnéd ezt a jegyzetet?')) {
         notes = notes.filter(note => note.id !== id);
@@ -193,7 +180,6 @@ function deleteNote(id) {
     }
 }
 
-// Segédfüggvények
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
@@ -210,7 +196,6 @@ function formatDate(date) {
     }).format(date);
 }
 
-// Modal bezárása kattintásra
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('modal')) {
         e.target.style.display = 'none';
@@ -219,7 +204,6 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// ESC billentyű kezelése
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         const openModal = document.querySelector('.modal[style*="block"]');

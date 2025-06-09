@@ -1,7 +1,6 @@
-# Kizárja minden fájlt és könyvtárat
+
 Scripts/
 Lib/
 Include/
 
-# Visszaadja a Src könyvtárat és annak tartalmát
 

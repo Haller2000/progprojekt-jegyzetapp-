@@ -23,7 +23,6 @@ urlpatterns = [
     path('', login_view, name='login'),
     path('regisztracio.html/', registration_view, name='registration'),
     path('index.html/', index, name='index'),
-    path('kijelentkezes.html/', logout_view, name='logout'),
-    path('jegyzet/mentes/', jegyzet_mentes, name='jegyzet_mentes'),
-    path('jegyzet/torles/', jegyzet_torles, name='jegyzet_torles'),
+
+
 ]
